@@ -33,7 +33,6 @@ class Music(commands.Cog):
         else:
             await channel.connect()
         
-        print("ogey we connected")
         async with ctx.typing():
             player = await YTDLSource.from_url(url, loop=self.bot.loop, stream=True)
             ctx.voice_client.play(player, after=lambda e: print(f'Player error: {e}') if e else None)
@@ -80,7 +79,6 @@ class Music(commands.Cog):
     
     @tasks.loop(seconds=1)
     async def play_queue(self, ctx):
-        print("hi")
         if ctx.voice_client.is_playing():
             return
         
